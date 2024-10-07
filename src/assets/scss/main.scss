@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import "normalize.css";
 @import "./vars.scss";
+@import "./helpers.scss";
 
 * {
   box-sizing: border-box;
@@ -35,4 +36,15 @@ p {
 .page-default {
   padding-top: 80px;
   padding-bottom: 58px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+  margin-bottom: 32px;
 }

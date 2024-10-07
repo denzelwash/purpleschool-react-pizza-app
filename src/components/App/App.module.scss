@@ -1,0 +1,33 @@
+.page-login {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    min-height: 100dvh;
+  }
+  &__logo {
+    padding-right: 88px;
+    margin-left: auto;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid #d4d6e0;
+    height: 100%;
+    padding: 60px 0 60px 88px;
+  }
+  &__btn {
+    width: 248px;
+    margin-top: 74px;
+    align-self: center;
+    margin-bottom: 30px;
+  }
+  &__text {
+    text-align: center;
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+  }
+}
