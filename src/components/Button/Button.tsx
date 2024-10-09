@@ -1,11 +1,10 @@
 import clsx from "clsx";
 import style from "./Button.module.scss";
-import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 import getClassString from "../../utils/getClassString";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  size?: "small" | "default";
+  size: "default" | "small";
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
