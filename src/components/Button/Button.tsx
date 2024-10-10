@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, forwardRef } from "react";
 import getClassString from "../../utils/getClassString";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size: "default" | "small";
+  size?: "default" | "small";
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
