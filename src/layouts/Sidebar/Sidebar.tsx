@@ -5,8 +5,8 @@ import clsx from "clsx";
 
 export default function Sidebar() {
   return (
-    <>
-      <div className={style["page-wrapper"]}>
+    <div className="container">
+      <div className={style["grid"]}>
         <div className={style["sidebar"]}>
           <img
             className={style["avatar"]}
@@ -40,6 +40,6 @@ export default function Sidebar() {
           <Outlet></Outlet>
         </div>
       </div>
-    </>
+    </div>
   );
 }
