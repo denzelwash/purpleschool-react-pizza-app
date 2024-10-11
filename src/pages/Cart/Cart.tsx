@@ -1,7 +1,9 @@
+import PageTitle from "../../components/PageTitle/PageTitle";
+
 export default function Cart() {
   return (
     <>
-      <span>Cart</span>
+      <PageTitle className="mb-0">Меню</PageTitle>
     </>
   );
 }
