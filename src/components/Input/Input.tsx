@@ -5,7 +5,7 @@ import getClassString from "../../utils/getClassString";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: string;
-  label: string;
+  label?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -20,9 +20,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           icon && style["input--with-icon"]
         )}
       >
-        <label className={style["input__label"]} htmlFor={id}>
-          {label}
-        </label>
+        {label && (
+          <label className={style["input__label"]} htmlFor={id}>
+            {label}
+          </label>
+        )}
         <div className={style["input__input-wr"]}>
           <input
             id={id}

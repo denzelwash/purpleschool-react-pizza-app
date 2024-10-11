@@ -25,12 +25,12 @@
     height: 24px;
     top: 50%;
     transform: translateY(-50%);
-    right: 16px;
+    left: 16px;
   }
   &::placeholder {
     color: #475069;
   }
   &--with-icon .input__input {
-    padding-right: 56px;
+    padding-left: 56px;
   }
 }
