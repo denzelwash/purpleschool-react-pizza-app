@@ -4,4 +4,5 @@ export interface Card {
   desc: string;
   poster: string;
   count: number;
+  rating: number;
 }

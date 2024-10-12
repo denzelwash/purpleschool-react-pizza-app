@@ -6,7 +6,7 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 18.21px 18.21px 36.43px 0px #d3d1d840;
-  &__count {
+  &__price {
     position: absolute;
     top: 12px;
     left: 12px;
@@ -66,5 +66,20 @@
     &.active {
       color: #37d8a7;
     }
+  }
+  &__rating {
+    position: absolute;
+    content: "";
+    top: 150px;
+    left: 12px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 136px;
+    font-size: 12px;
+    font-weight: 600;
   }
 }

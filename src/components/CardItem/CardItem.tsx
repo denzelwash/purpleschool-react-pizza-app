@@ -6,6 +6,7 @@ interface CardItemProps {
   poster: string;
   desc: string;
   count: number;
+  rating: number;
   toggleFavorite: () => void;
 }
 
@@ -14,10 +15,11 @@ export default function CardItem({
   poster,
   count,
   desc,
+  rating,
 }: CardItemProps) {
   return (
     <div className={style["card-item"]}>
-      <div className={style["card-item__count"]}>
+      <div className={style["card-item__price"]}>
         <span>{count}</span>₽
       </div>
       <img className={style["card-item__poster"]} src={poster} alt={title} />
@@ -30,6 +32,10 @@ export default function CardItem({
       <button className={clsx(style["card-item__order"])}>
         <img src="/img/cart-icon.svg" alt="" width={16} height={17} />
       </button>
+      <div className={clsx(style["card-item__rating"])}>
+        <span>{rating}</span>
+        <img src="/img/star-icon.svg" alt="" width={16} height={17} />
+      </div>
     </div>
   );
 }
