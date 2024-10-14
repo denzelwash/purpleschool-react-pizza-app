@@ -1,8 +1,8 @@
 export interface Card {
   id: number;
-  title: string;
-  desc: string;
-  poster: string;
-  count: number;
+  name: string;
+  price: number;
+  ingredients: string[];
+  image: string;
   rating: number;
 }

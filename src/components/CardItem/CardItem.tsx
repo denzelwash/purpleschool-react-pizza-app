@@ -1,33 +1,29 @@
 import clsx from "clsx";
 import style from "./CardItem.module.scss";
+import { Card } from "../../types/card";
 
-interface CardItemProps {
-  title: string;
-  poster: string;
-  desc: string;
-  count: number;
-  rating: number;
+interface CardItemProps extends Card {
   toggleFavorite: () => void;
 }
 
 export default function CardItem({
-  title,
-  poster,
-  count,
-  desc,
+  name,
+  image,
+  price,
+  ingredients,
   rating,
 }: CardItemProps) {
   return (
     <div className={style["card-item"]}>
       <div className={style["card-item__price"]}>
-        <span>{count}</span>₽
+        <span>{price}</span>₽
       </div>
-      <img className={style["card-item__poster"]} src={poster} alt={title} />
+      <img className={style["card-item__poster"]} src={image} alt={name} />
       <div className={style["card-item__text"]}>
         <a href="#" className={style["card-item__title"]}>
-          {title}
+          {name}
         </a>
-        <p className={style["card-item__desc"]}>{desc}</p>
+        <p className={style["card-item__desc"]}>{ingredients.join(", ")}</p>
       </div>
       <button className={clsx(style["card-item__order"])}>
         <img src="/img/cart-icon.svg" alt="" width={16} height={17} />

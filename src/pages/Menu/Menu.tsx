@@ -3,9 +3,30 @@ import clsx from "clsx";
 import style from "./Menu.module.scss";
 import Input from "../../components/Input/Input";
 import CardItem from "../../components/CardItem/CardItem";
-import { MOCK_CARDS } from "../../mocks/cards";
+import { API_URL } from "../../const";
+import { useEffect, useState } from "react";
+import { Card } from "../../types/card";
 
 export default function Menu() {
+  const [menu, setMenu] = useState<Card[]>([]);
+
+  async function getMenu() {
+    try {
+      const res = await fetch(`${API_URL}/products`);
+      if (!res.ok) {
+        return;
+      }
+      const data: Card[] = await res.json();
+      setMenu(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getMenu();
+  }, []);
+
   return (
     <>
       <div className={clsx(style["page-header"])}>
@@ -17,8 +38,8 @@ export default function Menu() {
         ></Input>
       </div>
       <div className={style["grid"]}>
-        {MOCK_CARDS.map((card) => (
-          <CardItem {...card} toggleFavorite={() => {}} />
+        {menu.map((card) => (
+          <CardItem {...card} key={card.id} toggleFavorite={() => {}} />
         ))}
       </div>
     </>
