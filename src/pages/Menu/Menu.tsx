@@ -6,17 +6,14 @@ import CardItem from "../../components/CardItem/CardItem";
 import { API_URL } from "../../const";
 import { useEffect, useState } from "react";
 import { Card } from "../../types/card";
+import axios from "axios";
 
 export default function Menu() {
   const [menu, setMenu] = useState<Card[]>([]);
 
   async function getMenu() {
     try {
-      const res = await fetch(`${API_URL}/products`);
-      if (!res.ok) {
-        return;
-      }
-      const data: Card[] = await res.json();
+      const { data } = await axios.get<Card[]>(`${API_URL}/products`);
       setMenu(data);
     } catch (e) {
       console.log(e);
