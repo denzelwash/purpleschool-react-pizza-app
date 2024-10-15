@@ -1,4 +1,4 @@
-export interface Card {
+export interface Product {
   id: number;
   name: string;
   price: number;

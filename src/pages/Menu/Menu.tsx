@@ -5,18 +5,18 @@ import Input from "../../components/Input/Input";
 import CardItem from "../../components/CardItem/CardItem";
 import { API_URL } from "../../const";
 import { useEffect, useState } from "react";
-import { Card } from "../../types/card";
+import { Product } from "../../types/product";
 import axios from "axios";
 import Loader from "../../components/Loader/Loader";
 
 export default function Menu() {
-  const [menu, setMenu] = useState<Card[]>([]);
+  const [menu, setMenu] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>();
 
   async function getMenu() {
     try {
       setIsLoading(true);
-      const { data } = await axios.get<Card[]>(`${API_URL}/products`);
+      const { data } = await axios.get<Product[]>(`${API_URL}/products`);
       setMenu(data);
       setIsLoading(false);
     } catch (e) {

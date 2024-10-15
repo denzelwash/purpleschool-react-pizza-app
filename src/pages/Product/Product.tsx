@@ -1,9 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { Card } from "../../types/card";
+import { Product as ProductType } from "../../types/product";
 
 export default function Product() {
-  const data = useLoaderData() as Card;
+  const data = useLoaderData() as ProductType;
 
   return (
     <>

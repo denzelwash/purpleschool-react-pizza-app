@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import style from "./CardItem.module.scss";
-import { Card } from "../../types/card";
+import { Product } from "../../types/product";
 import { Link } from "react-router-dom";
 
-interface CardItemProps extends Card {
+interface CardItemProps extends Product {
   toggleFavorite: () => void;
 }
 

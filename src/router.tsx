@@ -6,7 +6,7 @@ import Error from "./pages/Error/Error";
 import Product from "./pages/Product/Product";
 import Sidebar from "./layouts/Sidebar/Sidebar";
 import axios from "axios";
-import { Card } from "./types/card";
+import { Product as ProductType } from "./types/product";
 import { API_URL } from "./const";
 
 const router = createBrowserRouter([
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "product/:id",
         element: <Product />,
         loader: async ({ params }) => {
-          const { data } = await axios.get<Card[]>(
+          const { data } = await axios.get<ProductType[]>(
             `${API_URL}/products/${params.id}`
           );
           return data;
