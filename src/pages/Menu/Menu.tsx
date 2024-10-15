@@ -7,11 +7,11 @@ import { API_URL } from "../../const";
 import { useEffect, useState } from "react";
 import { Card } from "../../types/card";
 import axios from "axios";
-import Loader from "../../components/Loader/loader";
+import Loader from "../../components/Loader/Loader";
 
 export default function Menu() {
   const [menu, setMenu] = useState<Card[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>();
 
   async function getMenu() {
     try {

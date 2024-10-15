@@ -3,7 +3,11 @@ import Menu from "./pages/Menu/Menu";
 import Cart from "./pages/Cart/Cart";
 import Login from "./pages/Login/Login";
 import Error from "./pages/Error/Error";
+import Product from "./pages/Product/Product";
 import Sidebar from "./layouts/Sidebar/Sidebar";
+import axios from "axios";
+import { Card } from "./types/card";
+import { API_URL } from "./const";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +21,16 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "product/:id",
+        element: <Product />,
+        loader: async ({ params }) => {
+          const { data } = await axios.get<Card[]>(
+            `${API_URL}/products/${params.id}`
+          );
+          return data;
+        },
       },
     ],
   },

@@ -1,12 +1,14 @@
 import clsx from "clsx";
 import style from "./CardItem.module.scss";
 import { Card } from "../../types/card";
+import { Link } from "react-router-dom";
 
 interface CardItemProps extends Card {
   toggleFavorite: () => void;
 }
 
 export default function CardItem({
+  id,
   name,
   image,
   price,
@@ -20,9 +22,9 @@ export default function CardItem({
       </div>
       <img className={style["card-item__poster"]} src={image} alt={name} />
       <div className={style["card-item__text"]}>
-        <a href="#" className={style["card-item__title"]}>
+        <Link to={`/product/${id}`} className={style["card-item__title"]}>
           {name}
-        </a>
+        </Link>
         <p className={style["card-item__desc"]}>{ingredients.join(", ")}</p>
       </div>
       <button className={clsx(style["card-item__order"])}>
