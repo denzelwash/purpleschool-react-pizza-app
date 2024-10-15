@@ -7,16 +7,21 @@ import { API_URL } from "../../const";
 import { useEffect, useState } from "react";
 import { Card } from "../../types/card";
 import axios from "axios";
+import Loader from "../../components/Loader/loader";
 
 export default function Menu() {
   const [menu, setMenu] = useState<Card[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function getMenu() {
     try {
+      setIsLoading(true);
       const { data } = await axios.get<Card[]>(`${API_URL}/products`);
       setMenu(data);
+      setIsLoading(false);
     } catch (e) {
       console.log(e);
+      setIsLoading(false);
     }
   }
 
@@ -34,11 +39,15 @@ export default function Menu() {
           placeholder="Введите блюдо или состав"
         ></Input>
       </div>
-      <div className={style["grid"]}>
-        {menu.map((card) => (
-          <CardItem {...card} key={card.id} toggleFavorite={() => {}} />
-        ))}
-      </div>
+      {!isLoading ? (
+        <div className={style["grid"]}>
+          {menu.map((card) => (
+            <CardItem {...card} key={card.id} toggleFavorite={() => {}} />
+          ))}
+        </div>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 }
