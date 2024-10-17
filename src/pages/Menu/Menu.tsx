@@ -6,12 +6,13 @@ import CardItem from "../../components/CardItem/CardItem";
 import { API_URL } from "../../const";
 import { useEffect, useState } from "react";
 import { Product } from "../../types/product";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Loader from "../../components/Loader/Loader";
 
 export default function Menu() {
   const [menu, setMenu] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>();
+  const [error, setError] = useState<string>();
 
   async function getMenu() {
     try {
@@ -21,6 +22,9 @@ export default function Menu() {
       setIsLoading(false);
     } catch (e) {
       console.log(e);
+      if (e instanceof AxiosError) {
+        setError(e.message);
+      }
       setIsLoading(false);
     }
   }
@@ -39,6 +43,7 @@ export default function Menu() {
           placeholder="Введите блюдо или состав"
         ></Input>
       </div>
+      {error && <div>{error}</div>}
       {!isLoading ? (
         <div className={style["grid"]}>
           {menu.map((card) => (
