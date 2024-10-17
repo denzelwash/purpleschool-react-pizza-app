@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, defer } from "react-router-dom";
 import Menu from "./pages/Menu/Menu";
 import Cart from "./pages/Cart/Cart";
 import Login from "./pages/Login/Login";
@@ -29,10 +29,11 @@ const router = createBrowserRouter([
         element: <Product />,
         errorElement: <>Error</>,
         loader: async ({ params }) => {
-          const { data } = await axios.get<ProductType[]>(
-            `${API_URL}/products/${params.id}`
-          );
-          return data;
+          return defer({
+            data: axios
+              .get<ProductType[]>(`${API_URL}/products/${params.id}`)
+              .then((data) => data),
+          });
         },
       },
     ],
