@@ -6,14 +6,14 @@ import Error from "./pages/Error/Error";
 import Sidebar from "./layouts/Sidebar/Sidebar";
 import axios from "axios";
 import { Product as ProductType } from "./types/product";
-import { API_URL } from "./const";
+import { API_URL, ROUTE_PATH } from "./const";
 import { lazy } from "react";
 
 const Product = lazy(() => import("./pages/Product/Product"));
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTE_PATH.Main,
     element: <Sidebar />,
     children: [
       {
@@ -21,13 +21,13 @@ const router = createBrowserRouter([
         element: <Menu />,
       },
       {
-        path: "cart",
+        path: ROUTE_PATH.Cart,
         element: <Cart />,
       },
       {
-        path: "product/:id",
+        path: ROUTE_PATH.Product,
         element: <Product />,
-        errorElement: <>Error</>,
+        errorElement: <Error />,
         loader: async ({ params }) => {
           return defer({
             data: axios
@@ -39,11 +39,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "login",
+    path: ROUTE_PATH.Login,
     element: <Login />,
   },
   {
-    path: "*",
+    path: ROUTE_PATH.Error,
     element: <Error />,
   },
 ]);
