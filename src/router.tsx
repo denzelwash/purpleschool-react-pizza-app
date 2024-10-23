@@ -1,4 +1,4 @@
-import { createBrowserRouter, defer } from "react-router-dom";
+import { createBrowserRouter, defer, redirect } from "react-router-dom";
 import Menu from "./pages/Menu/Menu";
 import Cart from "./pages/Cart/Cart";
 import Login from "./pages/Login/Login";
@@ -8,6 +8,8 @@ import axios from "axios";
 import { Product as ProductType } from "./types/product";
 import { API_URL, ROUTE_PATH } from "./const";
 import { lazy } from "react";
+import Auth from "./layouts/Auth/Auth";
+import Registration from "./pages/Registration/Registration";
 
 const Product = lazy(() => import("./pages/Product/Product"));
 
@@ -39,8 +41,22 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: ROUTE_PATH.Login,
-    element: <Login />,
+    path: ROUTE_PATH.Auth,
+    element: <Auth />,
+    children: [
+      {
+        index: true,
+        loader: () => redirect(ROUTE_PATH.Main),
+      },
+      {
+        path: ROUTE_PATH.Login,
+        element: <Login />,
+      },
+      {
+        path: ROUTE_PATH.Registration,
+        element: <Registration />,
+      },
+    ],
   },
   {
     path: ROUTE_PATH.Error,

@@ -3,22 +3,23 @@ import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { ROUTE_PATH } from "../../const";
-import style from "./Login.module.scss";
+import style from "./Registration.module.scss";
 import clsx from "clsx";
 
 export default function Login() {
   return (
     <form className={style["form"]}>
       <PageTitle>Вход</PageTitle>
-      <Input label="Ваш email" />
-      <Input type="password" className="mb-0" label="Ваш пароль" />
+      <Input type="email" label="Ваш email" />
+      <Input type="password" label="Ваш пароль" />
+      <Input className="mb-0" label="Ваше имя" />
       <Button className={clsx("primary", style["form__btn"])} size="default">
-        Вход
+        Зарегистрироваться
       </Button>
       <div className={style["form__text"]}>
-        Нет акканута?
+        Есть акканут?
         <br />
-        <Link to={`../${ROUTE_PATH.Registration}`}>Зарегистрироваться</Link>
+        <Link to={`../${ROUTE_PATH.Login}`}>Войти</Link>
       </div>
     </form>
   );
