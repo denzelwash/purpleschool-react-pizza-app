@@ -10,13 +10,18 @@ import { lazy } from "react";
 import Auth from "./layouts/Auth/Auth";
 import Registration from "./pages/Registration/Registration";
 import api from "./services/api";
+import Private from "./pages/Private/Private";
 
 const Product = lazy(() => import("./pages/Product/Product"));
 
 const router = createBrowserRouter([
   {
     path: ROUTE_PATH.Main,
-    element: <Sidebar />,
+    element: (
+      <Private>
+        <Sidebar />
+      </Private>
+    ),
     children: [
       {
         index: true,
