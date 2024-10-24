@@ -8,13 +8,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = "", children, onClick, size = "default" }, ref) => (
+  ({ className = "", children, size = "default", ...props }, ref) => (
     <button
       ref={ref}
       className={clsx(style.btn, getClassString(className, style), {
         [style["btn--small"]]: size === "small",
       })}
-      onClick={onClick}
+      {...props}
     >
       {children}
     </button>

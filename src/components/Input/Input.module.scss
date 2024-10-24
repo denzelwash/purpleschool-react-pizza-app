@@ -18,6 +18,9 @@
     &-wr {
       position: relative;
     }
+    &::placeholder {
+      color: #8d99b9;
+    }
   }
   &__icon {
     position: absolute;
@@ -27,9 +30,7 @@
     transform: translateY(-50%);
     left: 16px;
   }
-  &::placeholder {
-    color: #475069;
-  }
+
   &--with-icon .input__input {
     padding-left: 56px;
   }

@@ -4,12 +4,12 @@ import Cart from "./pages/Cart/Cart";
 import Login from "./pages/Login/Login";
 import Error from "./pages/Error/Error";
 import Sidebar from "./layouts/Sidebar/Sidebar";
-import axios from "axios";
 import { Product as ProductType } from "./types/product";
-import { API_URL, ROUTE_PATH } from "./const";
+import { ROUTE_PATH } from "./const";
 import { lazy } from "react";
 import Auth from "./layouts/Auth/Auth";
 import Registration from "./pages/Registration/Registration";
+import api from "./services/api";
 
 const Product = lazy(() => import("./pages/Product/Product"));
 
@@ -32,8 +32,8 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         loader: async ({ params }) => {
           return defer({
-            data: axios
-              .get<ProductType[]>(`${API_URL}/products/${params.id}`)
+            data: api
+              .get<ProductType[]>(`/products/${params.id}`)
               .then((data) => data),
           });
         },
