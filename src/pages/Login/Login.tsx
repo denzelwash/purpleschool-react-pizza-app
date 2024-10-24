@@ -27,11 +27,13 @@ export default function Login() {
   };
 
   const sendLogin = async (email: string, password: string) => {
-    const { data } = await api.post("/auth/login", {
+    const res = await api.post("/auth/login", {
       email,
       password,
     });
-    console.log(data);
+    if (res) {
+      console.log(res.data);
+    }
   };
 
   return (
