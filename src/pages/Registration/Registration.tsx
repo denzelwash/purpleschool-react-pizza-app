@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -7,6 +7,12 @@ import style from "./Registration.module.scss";
 import clsx from "clsx";
 
 export default function Login() {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <form className={style["form"]}>
       <PageTitle>Вход</PageTitle>

@@ -1,10 +1,17 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import style from "./Sidebar.module.scss";
 import Button from "../../components/Button/Button";
 import clsx from "clsx";
 import { ROUTE_PATH } from "../../const";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/auth/login");
+  };
+
   return (
     <div className="container">
       <div className={style["grid"]}>
@@ -28,11 +35,12 @@ export default function Sidebar() {
               <Link to={ROUTE_PATH.Cart}>Корзина</Link>
               <div className={style["cart-count"]}>2</div>
             </li>
-            <li>
-              <Link to={ROUTE_PATH.Login}>Login</Link>
-            </li>
           </ul>
-          <Button className={clsx("primary", style["exit-btn"])} size="small">
+          <Button
+            className={clsx("primary", style["exit-btn"])}
+            size="small"
+            onClick={handleLogout}
+          >
             <img src="/img/exit-icon.svg" alt="" width={26} height={26} />
             <span>Выйти</span>
           </Button>

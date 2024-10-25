@@ -6,7 +6,7 @@ interface PrivateProps {
 }
 
 export default function Private({ children }: PrivateProps) {
-  const token = false;
+  const token = localStorage.getItem("token");
   if (!token) {
     return <Navigate to="/auth/login" replace />;
   }

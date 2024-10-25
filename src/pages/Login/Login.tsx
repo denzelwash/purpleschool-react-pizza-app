@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -7,6 +7,7 @@ import style from "./Login.module.scss";
 import clsx from "clsx";
 import { FormEvent } from "react";
 import api from "../../services/api";
+import { LoginResponse } from "../../types/auth";
 
 interface LoginForm {
   email: {
@@ -18,6 +19,9 @@ interface LoginForm {
 }
 
 export default function Login() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & LoginForm;
@@ -27,14 +31,20 @@ export default function Login() {
   };
 
   const sendLogin = async (email: string, password: string) => {
-    const res = await api.post("/auth/login", {
+    const res = await api.post<LoginResponse>("/auth/login", {
       email,
       password,
     });
-    if (res) {
-      console.log(res.data);
+    const token = res.data.access_token;
+    if (token) {
+      localStorage.setItem("token", token);
+      navigate("/");
     }
   };
+
+  if (token) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <form className={style["form"]} onSubmit={onSubmit}>
