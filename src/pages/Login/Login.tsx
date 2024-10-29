@@ -8,6 +8,8 @@ import clsx from "clsx";
 import { FormEvent } from "react";
 import api from "../../services/api";
 import { LoginResponse } from "../../types/auth";
+import { setJwt } from "../../store/slices/user";
+import { useAppDispatch } from "../../store/store";
 
 interface LoginForm {
   email: {
@@ -21,6 +23,7 @@ interface LoginForm {
 export default function Login() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const dispatch = useAppDispatch();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -37,7 +40,7 @@ export default function Login() {
     });
     const token = res.data.access_token;
     if (token) {
-      localStorage.setItem("token", token);
+      dispatch(setJwt(token));
       navigate("/");
     }
   };

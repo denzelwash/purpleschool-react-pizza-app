@@ -3,12 +3,15 @@ import style from "./Sidebar.module.scss";
 import Button from "../../components/Button/Button";
 import clsx from "clsx";
 import { ROUTE_PATH } from "../../const";
+import { useAppDispatch } from "../../store/store";
+import { logout } from "../../store/slices/user";
 
 export default function Sidebar() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    dispatch(logout());
     navigate("/auth/login");
   };
 
