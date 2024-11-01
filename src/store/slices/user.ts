@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import loadState from "../../utils/loadState";
+import { login } from "../thunks/user";
 
 interface UserState {
   jwt: string | null;
@@ -17,14 +18,17 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setJwt: (state, action: PayloadAction<string>) => {
-      state.jwt = action.payload;
-    },
     logout: (state) => {
       state.jwt = null;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.jwt = action.payload.access_token;
+    });
+    // .addCase(login.rejected, (state, action) => {});
+  },
 });
 
 export default userSlice;
-export const { setJwt, logout } = userSlice.actions;
+export const { logout } = userSlice.actions;

@@ -16,6 +16,7 @@ const api = ((): AxiosInstance => {
         position: "top-right",
       });
     }
+    return Promise.reject(error);
   });
 
   return instance;

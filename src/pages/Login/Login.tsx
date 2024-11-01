@@ -1,15 +1,13 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { ROUTE_PATH } from "../../const";
 import style from "./Login.module.scss";
 import clsx from "clsx";
-import { FormEvent } from "react";
-import api from "../../services/api";
-import { LoginResponse } from "../../types/auth";
-import { setJwt } from "../../store/slices/user";
-import { useAppDispatch } from "../../store/store";
+import { FormEvent, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { login } from "../../store/thunks/user";
 
 interface LoginForm {
   email: {
@@ -22,32 +20,22 @@ interface LoginForm {
 
 export default function Login() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector((store) => store.user.jwt);
+
+  useEffect(() => {
+    if (jwt) {
+      navigate("/");
+    }
+  }, [jwt]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & LoginForm;
     const email = target.email.value;
     const password = target.password.value;
-    sendLogin(email, password);
+    dispatch(login({ email, password }));
   };
-
-  const sendLogin = async (email: string, password: string) => {
-    const res = await api.post<LoginResponse>("/auth/login", {
-      email,
-      password,
-    });
-    const token = res.data.access_token;
-    if (token) {
-      dispatch(setJwt(token));
-      navigate("/");
-    }
-  };
-
-  if (token) {
-    return <Navigate to="/" replace />;
-  }
 
   return (
     <form className={style["form"]} onSubmit={onSubmit}>
