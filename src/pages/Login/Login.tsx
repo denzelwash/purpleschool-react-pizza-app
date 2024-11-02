@@ -7,7 +7,7 @@ import style from "./Login.module.scss";
 import clsx from "clsx";
 import { FormEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { login } from "../../store/thunks/user";
+import { login } from "../../store/thunks/auth";
 
 interface LoginForm {
   email: {
@@ -21,7 +21,7 @@ interface LoginForm {
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const jwt = useAppSelector((store) => store.user.jwt);
+  const jwt = useAppSelector((store) => store.auth.jwt);
 
   useEffect(() => {
     if (jwt) {

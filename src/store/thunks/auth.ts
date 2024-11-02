@@ -3,7 +3,7 @@ import api from "../../services/api";
 import { LoginResponse, LoginPayload } from "../../types/auth";
 
 const login = createAsyncThunk<LoginResponse, LoginPayload>(
-  "user/login",
+  "auth/login",
   async ({ email, password }) => {
     const { data } = await api.post<LoginResponse>("/auth/login", {
       email,

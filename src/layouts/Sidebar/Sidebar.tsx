@@ -4,7 +4,7 @@ import Button from "../../components/Button/Button";
 import clsx from "clsx";
 import { ROUTE_PATH } from "../../const";
 import { useAppDispatch } from "../../store/store";
-import { logout } from "../../store/slices/user";
+import { logout } from "../../store/slices/auth";
 
 export default function Sidebar() {
   const navigate = useNavigate();

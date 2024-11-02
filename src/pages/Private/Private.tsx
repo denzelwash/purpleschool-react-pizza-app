@@ -7,7 +7,7 @@ interface PrivateProps {
 }
 
 export default function Private({ children }: PrivateProps) {
-  const token = useAppSelector((state) => state.user.jwt);
+  const token = useAppSelector((state) => state.auth.jwt);
   if (!token) {
     return <Navigate to="/auth/login" replace />;
   }

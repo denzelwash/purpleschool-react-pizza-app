@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./slices/user";
+import authSlice from "./slices/auth";
 import saveState from "../utils/saveState";
 import { useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
   reducer: {
-    [userSlice.name]: userSlice.reducer,
+    [authSlice.name]: authSlice.reducer,
   },
 });
 
 store.subscribe(() => {
-  saveState({ jwt: store.getState()[userSlice.name].jwt }, "userData");
+  saveState({ jwt: store.getState()[authSlice.name].jwt }, "authData");
 });
 
 export type RootState = ReturnType<typeof store.getState>;

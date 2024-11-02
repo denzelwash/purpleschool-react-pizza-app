@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import loadState from "../../utils/loadState";
-import { login } from "../thunks/user";
+import { login } from "../thunks/auth";
 
-interface UserState {
+interface authState {
   jwt: string | null;
 }
 
-const initialState: UserState = {
-  jwt: loadState<UserPersistentState>("userData")?.jwt ?? null,
+const initialState: authState = {
+  jwt: loadState<authPersistentState>("authData")?.jwt ?? null,
 };
 
-interface UserPersistentState {
+interface authPersistentState {
   jwt: string | null;
 }
 
-export const userSlice = createSlice({
-  name: "user",
+export const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
@@ -30,5 +30,5 @@ export const userSlice = createSlice({
   },
 });
 
-export default userSlice;
-export const { logout } = userSlice.actions;
+export default authSlice;
+export const { logout } = authSlice.actions;
