@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import loadState from "../../utils/loadState";
-import { getProfile, login } from "../thunks/auth";
+import { getProfile, login, registration } from "../thunks/auth";
 import { AuthStatus, User } from "../../types/auth";
 
 interface authState {
@@ -34,6 +34,9 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
+      state.jwt = action.payload.access_token;
+    });
+    builder.addCase(registration.fulfilled, (state, action) => {
       state.jwt = action.payload.access_token;
     });
     builder.addCase(getProfile.fulfilled, (state, action) => {

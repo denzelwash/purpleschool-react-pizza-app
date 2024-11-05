@@ -1,12 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
-import { LoginResponse, LoginPayload, User } from "../../types/auth";
+import {
+  AuthResponse,
+  RegistrationPayload,
+  LoginPayload,
+  User,
+} from "../../types/auth";
 import { RootState } from "../store";
 
-const login = createAsyncThunk<LoginResponse, LoginPayload>(
+const login = createAsyncThunk<AuthResponse, LoginPayload>(
   "auth/login",
   async ({ email, password }) => {
-    const { data } = await api.post<LoginResponse>("/auth/login", {
+    const { data } = await api.post<AuthResponse>("/auth/login", {
+      email,
+      password,
+    });
+    return data;
+  }
+);
+
+const registration = createAsyncThunk<AuthResponse, RegistrationPayload>(
+  "auth/registration",
+  async ({ name, email, password }) => {
+    const { data } = await api.post<AuthResponse>("/auth/register", {
+      name,
       email,
       password,
     });
@@ -27,4 +44,4 @@ const getProfile = createAsyncThunk<User, void, { state: RootState }>(
   }
 );
 
-export { login, getProfile };
+export { login, registration, getProfile };

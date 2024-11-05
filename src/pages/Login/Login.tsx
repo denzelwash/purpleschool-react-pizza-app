@@ -32,7 +32,7 @@ export default function Login() {
     }
   }, [jwt]);
 
-  const onSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & LoginForm;
     const email = target.email.value;
@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   return (
-    <form className={style["form"]} onSubmit={onSubmit}>
+    <form className={style["form"]} onSubmit={handleSubmit}>
       <PageTitle>Вход</PageTitle>
       <Input label="Ваш email" name="email" placeholder="Email" />
       <Input
