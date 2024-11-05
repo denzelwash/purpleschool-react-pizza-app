@@ -1,13 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import loadState from "../../utils/loadState";
-import { login } from "../thunks/auth";
+import { getProfile, login } from "../thunks/auth";
+import { AuthStatus, User } from "../../types/auth";
 
 interface authState {
   jwt: string | null;
+  user: User | null;
+  authStatus: AuthStatus;
 }
 
 const initialState: authState = {
   jwt: loadState<authPersistentState>("authData")?.jwt ?? null,
+  user: null,
+  authStatus: AuthStatus.Unknown,
 };
 
 interface authPersistentState {
@@ -20,15 +25,28 @@ export const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.jwt = null;
+      state.user = null;
+      state.authStatus = AuthStatus.NoAuth;
+    },
+    setAuthStatus: (state, { payload }) => {
+      state.authStatus = payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       state.jwt = action.payload.access_token;
     });
-    // .addCase(login.rejected, (state, action) => {});
+    builder.addCase(getProfile.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.authStatus = AuthStatus.Auth;
+    });
+    builder.addCase(getProfile.rejected, (state) => {
+      state.jwt = null;
+      state.user = null;
+      state.authStatus = AuthStatus.NoAuth;
+    });
   },
 });
 
 export default authSlice;
-export const { logout } = authSlice.actions;
+export const { logout, setAuthStatus } = authSlice.actions;

@@ -3,12 +3,13 @@ import style from "./Sidebar.module.scss";
 import Button from "../../components/Button/Button";
 import clsx from "clsx";
 import { ROUTE_PATH } from "../../const";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { logout } from "../../store/slices/auth";
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const user = useAppSelector((store) => store.auth.user);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -26,8 +27,8 @@ export default function Sidebar() {
             height={80}
             alt=""
           />
-          <h2 className={style["title"]}>Антон Ларичев</h2>
-          <p className={style["email"]}>alaricode@ya.ru</p>
+          <h2 className={style["title"]}>{user?.name}</h2>
+          <p className={style["email"]}>{user?.email}</p>
           <ul className={style["menu"]}>
             <li>
               <img src="/img/menu-icon.svg" width={23} height={23} alt="" />

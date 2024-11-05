@@ -8,6 +8,8 @@ import clsx from "clsx";
 import { FormEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { login } from "../../store/thunks/auth";
+import { setAuthStatus } from "../../store/slices/auth";
+import { AuthStatus } from "../../types/auth";
 
 interface LoginForm {
   email: {
@@ -21,10 +23,11 @@ interface LoginForm {
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const jwt = useAppSelector((store) => store.auth.jwt);
+  const { jwt } = useAppSelector((store) => store.auth);
 
   useEffect(() => {
     if (jwt) {
+      dispatch(setAuthStatus(AuthStatus.Unknown));
       navigate("/");
     }
   }, [jwt]);
