@@ -10,6 +10,8 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.auth.user);
+  const products = useAppSelector((store) => store.cart.products);
+  const productsCount = products.reduce((acc, elem) => (acc += elem.count), 0);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -37,7 +39,7 @@ export default function Sidebar() {
             <li>
               <img src="/img/cart-icon.svg" width={23} height={23} alt="" />
               <Link to={ROUTE_PATH.Cart}>Корзина</Link>
-              <div className={style["cart-count"]}>2</div>
+              <div className={style["cart-count"]}>{productsCount}</div>
             </li>
           </ul>
           <Button

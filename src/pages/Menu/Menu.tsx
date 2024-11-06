@@ -7,10 +7,13 @@ import { useEffect, useState } from "react";
 import { Product } from "../../types/product";
 import Loader from "../../components/Loader/Loader";
 import api from "../../services/api";
+import { useAppDispatch } from "../../store/store";
+import { addProduct } from "../../store/slices/cart";
 
 export default function Menu() {
   const [menu, setMenu] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>();
+  const dispatch = useAppDispatch();
 
   async function getMenu() {
     setIsLoading(true);
@@ -25,6 +28,10 @@ export default function Menu() {
     getMenu();
   }, []);
 
+  const handleAddToCart = (id: number) => {
+    dispatch(addProduct(id));
+  };
+
   return (
     <>
       <div className={clsx(style["page-header"])}>
@@ -38,7 +45,11 @@ export default function Menu() {
       {!isLoading ? (
         <div className={style["grid"]}>
           {menu.map((card) => (
-            <CardItem {...card} key={card.id} toggleFavorite={() => {}} />
+            <CardItem
+              {...card}
+              key={card.id}
+              addToCart={() => handleAddToCart(card.id)}
+            />
           ))}
         </div>
       ) : (

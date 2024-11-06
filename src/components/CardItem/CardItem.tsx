@@ -4,7 +4,7 @@ import { Product } from "../../types/product";
 import { Link } from "react-router-dom";
 
 interface CardItemProps extends Product {
-  toggleFavorite: () => void;
+  addToCart: () => void;
 }
 
 export default function CardItem({
@@ -13,6 +13,7 @@ export default function CardItem({
   image,
   price,
   ingredients,
+  addToCart,
   rating,
 }: CardItemProps) {
   return (
@@ -27,7 +28,7 @@ export default function CardItem({
         </Link>
         <p className={style["card-item__desc"]}>{ingredients.join(", ")}</p>
       </div>
-      <button className={clsx(style["card-item__order"])}>
+      <button className={clsx(style["card-item__order"])} onClick={addToCart}>
         <img src="/img/cart-icon.svg" alt="" width={16} height={17} />
       </button>
       <div className={clsx(style["card-item__rating"])}>

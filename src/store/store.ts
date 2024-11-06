@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./slices/auth";
 import saveState from "../utils/saveState";
 import { useDispatch, useSelector } from "react-redux";
+import cartSlice from "./slices/cart";
 
 export const store = configureStore({
   reducer: {
     [authSlice.name]: authSlice.reducer,
+    [cartSlice.name]: cartSlice.reducer,
   },
 });
 
