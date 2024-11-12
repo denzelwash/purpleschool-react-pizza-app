@@ -11,3 +11,7 @@ export interface CartItem {
   id: number;
   count: number;
 }
+
+export interface CartItemFull
+  extends Omit<Product, "ingredients" | "rating">,
+    Pick<CartItem, "count"> {}
