@@ -31,11 +31,12 @@ export default function Cart() {
     <>
       <PageTitle>Корзина</PageTitle>
       {!products.length && <p>Корзина пуста</p>}
-      {!!cartProducts.length && (
+      {!!cartProducts.length && !!products.length && (
         <>
           <div className={style["cart-grid"]}>
             {products.map((product) => (
               <CartItem
+                key={product.id}
                 {...product}
                 {...cartProducts.find((p) => p.id === product.id)!}
               ></CartItem>
