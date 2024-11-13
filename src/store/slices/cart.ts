@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../../types/product";
+import loadState from "../../utils/loadState";
 
 interface CartState {
   products: CartItem[];
 }
 
 const initialState: CartState = {
-  products: [],
+  products: loadState<CartItem[]>("cart") ?? [],
 };
 
 export const cartSlice = createSlice({

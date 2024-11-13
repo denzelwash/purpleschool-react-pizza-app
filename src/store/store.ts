@@ -13,6 +13,7 @@ export const store = configureStore({
 
 store.subscribe(() => {
   saveState({ jwt: store.getState()[authSlice.name].jwt }, "authData");
+  saveState(store.getState()[cartSlice.name].products, "cart");
 });
 
 export type RootState = ReturnType<typeof store.getState>;
