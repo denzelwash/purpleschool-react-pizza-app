@@ -9,6 +9,8 @@ import { CartItemFull } from "../../types/product";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
+const DELIVERY_COST = 196;
+
 export default function Cart() {
   const [cartProducts, setCartProducts] = useState<CartItemFull[]>([]);
   const products = useAppSelector((store) => store.cart.products);
@@ -26,6 +28,14 @@ export default function Cart() {
     const res = await Promise.all(products.map((p) => getCartProduct(p.id)));
     setCartProducts(res);
   };
+
+  const totalProductsCost = products.reduce((acc, val) => {
+    const product = cartProducts.find((p) => p.id === val.id);
+    if (product) {
+      return acc + val.count * product.price;
+    }
+    return 0;
+  }, 0);
 
   return (
     <>
@@ -55,21 +65,22 @@ export default function Cart() {
             <li>
               <p>Итог</p>
               <p>
-                640 <span>₽</span>
+                {totalProductsCost}
+                <span>₽</span>
               </p>
             </li>
             <li>
               <p>Доставка</p>
               <p>
-                640 <span>₽</span>
+                {DELIVERY_COST} <span>₽</span>
               </p>
             </li>
             <li>
               <p>
-                Итог <span>(2)</span>
+                Итог <span>({products.length})</span>
               </p>
               <p>
-                640 <span>₽</span>
+                {totalProductsCost + DELIVERY_COST} <span>₽</span>
               </p>
             </li>
           </ul>
