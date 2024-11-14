@@ -48,8 +48,12 @@ export const cartSlice = createSlice({
     clearProduct: (state, { payload }: PayloadAction<number>) => {
       state.products = state.products.filter((p) => p.id !== payload);
     },
+    clearAllProducts: (state) => {
+      state.products = [];
+    },
   },
 });
 
 export default cartSlice;
-export const { addProduct, removeProduct, clearProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, clearProduct, clearAllProducts } =
+  cartSlice.actions;

@@ -1,5 +1,5 @@
 import style from "./CartItem.module.scss";
-import { CartItemFull } from "../../types/product";
+import { CartItemFull } from "../../types/cart";
 import cartSlice from "../../store/slices/cart";
 import { useAppDispatch } from "../../store/store";
 
